@@ -1,0 +1,39 @@
+name: Hugo Lint and Build
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+          extended: true
+
+      - name: Validate Hugo config
+        run: |
+          hugo config
+
+      - name: Build site
+        run: |
+          hugo --minify
+
+      - name: Upload public folder as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: hugo-public
+          path: public

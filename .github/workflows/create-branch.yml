@@ -1,0 +1,33 @@
+name: Create Bugfix Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch_name:
+        description: 'Name of the bugfix/feature branch (without prefix)'
+        required: true
+        type: string
+      base_branch:
+        description: 'Base branch to branch off from'
+        required: false
+        default: 'master'
+        type: string
+
+jobs:
+  create-branch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.base_branch }}
+
+      - name: Create new branch
+        run: |
+          BRANCH_NAME="${{ github.event.inputs.branch_name }}"
+          FULL_BRANCH_NAME="bugfix/${BRANCH_NAME}"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -b "$FULL_BRANCH_NAME"
+          git push origin "$FULL_BRANCH_NAME"

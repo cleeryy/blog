@@ -1,0 +1,38 @@
+name: Snyk Container Scan
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 3 * * 1'
+
+jobs:
+  snyk-container:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image (local only)
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: false
+          tags: blog:ci-snyk
+
+      - name: Run Snyk to check Docker image for vulnerabilities
+        uses: snyk/actions/docker@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          image: blog:ci-snyk
+          args: --severity-threshold=high
+
+      - name: Upload results to GitHub Security tab
+        uses: snyk/actions/upload-sarif@master
+        with:
+          sarif_file: snyk.sarif
