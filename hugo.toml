@@ -1,0 +1,48 @@
+baseURL = "https://cleeryy.com"
+languageCode = "fr-fr"
+defaultContentLanguage = "fr"
+title = "Cleeryy Blog"
+theme = "ananke"
+
+# Enable GitHub integration
+enableGitInfo = true
+
+# Build settings
+enableRobotsTXT = true
+enableEmoji = true
+
+# Markup settings
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    style = "github"
+    lineNos = true
+    codeFences = true
+
+# Menu
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 10
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 20
+
+# Privacy
+[privacy]
+  [privacy.disqus]
+    disable = true
+  [privacy.googleAnalytics]
+    disable = true
+  [privacy.instagram]
+    disable = true
+  [privacy.twitter]
+    disable = true
+  [privacy.vimeo]
+    disable = true
+  [privacy.youtube]
+    disable = true

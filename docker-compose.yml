@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  blog:
+    build: .
+    ports:
+      - "1313:80"
+    environment:
+      - HUGO_ENV=production
+    restart: unless-stopped
+    labels:
+      - "com.cleeryy.blog.description=Hugo blog for cleeryy.com"
+      - "com.cleeryy.blog.version=1.0.0"
