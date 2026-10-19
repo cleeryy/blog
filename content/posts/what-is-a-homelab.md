@@ -1,57 +1,37 @@
 +++
-title = "what is a homelab (and why you should build one before you're ready)"
+title = "own your computers: what a homelab teaches that the cloud doesn't"
 date = "2026-10-19T14:45:00Z"
 author = "cleeryy"
 authorTwitter = ""
 cover = ""
-tags = ["homelab", "beginners", "proxmox", "self-hosting", "essay"]
-keywords = ["homelab", "home server", "proxmox", "self-hosting", "why homelab"]
-description = "two years ago my blog lived on a rented VPS. then i killed the VPS — and discovered the difference between renting computers and owning them. this is that story, and why you should start your own lab."
+tags = ["homelab", "self-hosting", "essay", "own-your-data"]
+keywords = ["homelab", "home server", "self-hosting", "rent vs own infrastructure"]
+description = "two years of renting a VPS taught me to be a customer. Six months of owning my servers taught me how they work. On the difference that matters."
 showFullContent = false
 readingTime = true
 hideComments = false
 +++
 
-it was a tuesday night, almost 2am, and i had just locked myself out of my own network.
+for two years, this blog lived on a rented virtual server: a plain apache setup, a monthly bill, zero thought about hardware. it worked, right up until the day i cancelled the VPS — and the blog died with it. everything i had left was a backup tarball in my nextcloud. the resurrection, from that tarball to the gitops pipeline serving you this page, is told [here](/posts/welcome-back/). but the interesting question isn't how the blog came back. it's what changed in my head between renting that VPS and owning the machines it runs on now.
 
-not metaphorically. i had been playing with VLANs on my firewall — one wrong rule, one click too confident — and suddenly my laptop couldn't reach anything, including the firewall itself. the girlfriend asleep in the next room, my phone's flashlight between my teeth, a cable plugged straight into the box to undo what i'd done. twenty minutes of pure, sweaty panic. and when the dashboard came back, i laughed out loud, alone in the dark.
+because that is what a homelab is, stripped of the rack photos and the blinking LEDs: a place where you own the computers, and therefore own the consequences.
 
-that night taught me more about networking than a semester of lectures. and that, right there, is a homelab.
+renting teaches you the interface. a VPS gives you root on a machine you will never see, on a network you will never touch, with disks that never click before dying. everything outside your virtual box is someone else's problem — which is precisely why you learn nothing about it. that's not a flaw in the product; it's the product. but it means the learning stops at the hypervisor's edge, exactly where the interesting failures live.
 
-## renting computers vs owning them
+owning teaches you the stack. the first time you install proxmox on a real box and your first VM can't reach the network, there is no support ticket to open. there's you, a cable, and documentation. eric lonsdale, who has written [the most honest beginner guide i know](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/), recommends starting with a refurbished office mini PC — around €100-150, 16GB of RAM minimum — precisely because the stakes are real but survivable. his rule of thumb matches what the community repeats everywhere: RAM runs out first, everything else can wait.
 
-for two years, my blog lived on a VPS — a virtual server rented from someone else's datacenter, running a plain apache server. it worked fine. i paid every month, i never thought about the hardware, and i learned almost nothing. when i finally killed that VPS, the blog died with it, and all i had left was a backup tarball gathering dust in my nextcloud. ([here's how the resurrection went](/posts/welcome-back/).)
+the objection is always money and power. both are smaller than they look. the current efficiency darling, intel's N100, idles around 6 watts at the wall — [measured repeatedly, not marketed](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not/) — which works out to roughly €10-25 a year in electricity. that is less than two months of the streaming subscriptions most people keep without thinking. the expensive part of a homelab was never the hardware. it's the evenings.
 
-renting taught me how to be a customer. owning taught me how things work.
+so what does ownership actually buy you, intellectually? three things, in order.
 
-a homelab is the opposite of a VPS: a server — or three — sitting in *your* home, running *your* services, breaking in *your* face at 2am. it's the difference between reading about swimming and getting thrown in the pool. the pool is cold, you swallow water, and you learn to swim fast.
+first, failure with a return address. when my deployment pipeline silently refused to update containers last week, there was no status page to check — the bug was a swarm update-order setting buried in my own deployer, and finding it taught me how orchestrators roll out containers. a cloud user would have filed a ticket and learned nothing. i have the scar and the explanation. one DevOps practitioner [puts it crisply](http://usmanmasoodashraf.com/posts/my-first-homelab-setup/): homelabs exist to practice "technologies too risky for production systems." the risk is the feature.
 
-## the night the ads died
+second, privacy as a side effect of competence. nobody starts self-hosting photos or DNS out of ideology; they start because a thirty-minute ad-blocking DNS container makes every page on the home network load clean, and suddenly depending on nine subscriptions to reach your own files feels absurd. ownership first, opinions later. the ideology, if it comes, is earned.
 
-my first real victory wasn't impressive on paper. i installed an ad blocker — pihole — as my home DNS server, in a docker container, in about thirty minutes. then i opened a news website and the page just... loaded. clean. silent. no popups, no autoplay video screaming about insurance.
+third, the discipline that only consequences teach. snapshots before changes, one reverse proxy as the single front door, monitoring on everything because silent failures are the default state of computers, backups that get restore-tested because an untested backup is a rumor. none of these are homelab-specific wisdom. they're production wisdom, learned at home where mistakes cost an evening instead of a job.
 
-i called my girlfriend over to show her. she stared at the screen, then at me, and said "cool" in the exact tone of someone tolerating a technical monologue. but i didn't care. every device in the house was suddenly faster, and *i* had done that, with a thirty-minute container on a machine in my closet. that feeling never really leaves you. it just scales up: first it's the ads, then it's your photos leaving google, then it's your entire digital life running on hardware you own.
+none of this argues against the cloud. plenty of workloads belong there, starting with anything that must survive your house losing power. the honest framing, borrowed from the guides above: rent for reach and elasticity, own for understanding. my blog now lives on both sides of that line — source on github, containers built in CI, running on machines i can touch — and each side taught me what the other hides.
 
-## what it actually costs (less than your streaming subscriptions)
+if you're considering it, here is the decision procedure i wish someone had handed me. if your goal is learning infrastructure, buy the refurbished box; if your goal is silence and low bills, buy the N100 new; if your goal is a public service by friday, rent the VPS — then ask yourself what happens the day you stop paying. and whatever you choose, do one thing in the first week: break something unimportant on purpose, and restore it. if restoration takes ten minutes, you have a lab. if it takes a weekend, you have your first lesson. either way, you win.
 
-people imagine server racks and four-figure bills. forget that. the homelab community's best-kept open secret is that the ideal starter machine is a refurbished office mini PC — the kind companies throw out by the pallet. a Lenovo Tiny or Dell Micro costs around €100-150, draws less power than a light bulb at idle, and happily runs a dozen services. eric over at readthemanual, who's been doing this for twenty years, gives exactly this advice to every beginner, and [his breakdown of the three paths — buy, build, or rent](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/) is the most honest guide i've found.
-
-if silence matters to you (it will, once the machine lives near your bedroom), the current darling is intel's N100: roughly 6 watts idle, whisper-quiet, about €150 new. people have measured it six ways to sunday — [it sips power like a raspberry pi and works like a real computer](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not/). my whole starter setup costs less per year in electricity than two months of the streaming services i cancelled to pay for it. the math isn't even close.
-
-so no, you don't need a rack. you need a small box, an evening, and permission to break things.
-
-## the religion of the snapshot
-
-here's the thing nobody tells you on day one: the homelab doesn't teach you technology. it teaches you *discipline disguised as technology*.
-
-it starts with snapshots. proxmox — the free virtualization platform nearly everyone starts on — lets you photograph a machine's entire state in one click before you touch anything. the first time you nuke a VM and restore it in forty seconds, something clicks in your brain: fear leaves the room. and without fear, you experiment ten times more. that one habit, snapshot-before-not-after, is worth more than any tutorial.
-
-then comes naming. then monitoring, because you discover things die silently all the time and you'd never know. then backups — real ones, restore-tested ones, because one day a disk *will* click its last click and you'll learn the difference between a backup and a rumor. each scar becomes a rule. my containers are named by VLAN and IP so i always know where anything lives. every service sits behind one reverse proxy with real encryption. nothing important runs unmonitored. none of this came from a book. all of it came from tuesday nights.
-
-## why i'm writing this twice a week
-
-i'm a computer science student in toulouse. i could learn this stuff in class, in theory, on slides. instead i run a two-node proxmox cluster, a firewall with four VLANs, my own git server, and a deployment pipeline that ships this very page from a git push. not because i need to — because every outage at 2am rewires my brain a little, and i want to keep the receipts.
-
-so here's the deal with this series: twice a week, one article, each one about something real in my lab. we'll start where i started — one machine, one VM, trembling hands — and walk all the way down: containers, networks, firewalls, backups that actually restore, and the pipeline serving these words. every piece comes with the hands-on part, because reading about swimming, remember?
-
-the pool is cold. the water's fine. snapshot first — and jump in.
+that is the promise of the series starting here: not a catalog of tools, but the reasoning behind real choices, with the receipts. next, we install proxmox — and find out what your hardware is actually capable of.
