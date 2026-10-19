@@ -1,0 +1,71 @@
+/* Custom overrides — survives theme updates (loaded via extended_head.html) */
+
+/* 1. Brand accent: warm orange (matches favicon square #f08d49) */
+:root {
+  --accent: #f08d49;
+}
+
+/* 2. Article list: distinct cards instead of a flat stream */
+.posts .post.on-list {
+  border: 1px solid color-mix(in srgb, var(--foreground) 18%, transparent);
+  padding: 22px 24px;
+  margin-bottom: 30px;
+  background: color-mix(in srgb, var(--foreground) 2.5%, transparent);
+}
+
+.posts .post.on-list:hover {
+  border-color: color-mix(in srgb, var(--accent) 65%, transparent);
+}
+
+.posts .post.on-list .post-title {
+  font-size: 1.5rem;
+  margin-bottom: 10px !important;
+  padding-bottom: 10px;
+}
+
+.posts .post.on-list .post-title a {
+  text-decoration: none;
+}
+
+/* meta line: date :: reading time :: tags, dimmed but readable */
+.posts .post.on-list .post-meta {
+  font-size: 0.85rem;
+  margin-bottom: 12px;
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+}
+
+.posts .post.on-list .post-tags a {
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  padding: 1px 8px;
+  margin-right: 6px;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* excerpt */
+.posts .post.on-list .post-content {
+  margin-top: 8px;
+  color: color-mix(in srgb, var(--foreground) 85%, transparent);
+}
+
+/* read-more: clearly a button */
+.posts .post.on-list .read-more.button {
+  margin-top: 14px;
+}
+
+/* 3. Single post page: air out the content */
+.post .post-content p {
+  line-height: 1.75;
+}
+
+.post .post-content h2 {
+  margin-top: 2em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+/* 4. Selection + scrollbar in brand color */
+::selection {
+  background: var(--accent);
+  color: var(--background);
+}

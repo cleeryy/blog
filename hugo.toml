@@ -5,6 +5,10 @@ theme = "terminal"
 
 pagination.pagerSize = 5
 
+# SEO
+enableRobotsTXT = true
+enableEmoji = true
+
 # Required for Chroma and the custom syntax highlighting.
 [markup.highlight]
   noClasses = false
@@ -15,7 +19,7 @@ pagination.pagerSize = 5
   contentTypeName = "writeups"
 
   # if you set this to 0, only submenu trigger will be visible
-  showMenuItems = 2
+  showMenuItems = 4
 
   # show selector to switch language
   showLanguageSelector = false
@@ -79,7 +83,7 @@ pagination.pagerSize = 5
     [languages.en.params]
       subtitle = "cleeryy's website!"
       owner = "cleeryy"
-      keywords = ""
+      keywords = "homelab,self-hosting,cybersecurity,ctf,writeups,proxmox,opnsense,docker"
       copyright = ""
       menuMore = "show more"
       readMore = "read more"
@@ -105,4 +109,14 @@ pagination.pagerSize = 5
           identifier = "writeups"
           name = "writeups"
           url = "/writeups"
+
+        [[languages.en.menu.main]]
+          identifier = "homelab"
+          name = "homelab"
+          url = "/homelab"
+
+        [[languages.en.menu.main]]
+          identifier = "uses"
+          name = "uses"
+          url = "/uses"
 
