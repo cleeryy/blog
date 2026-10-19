@@ -52,6 +52,8 @@ The honest price tag is time, not money. When you self-host, you become the CTO,
 
 And yes, let's be honest about the shallow part too: having real hardware is fun. RAM sticks, blinking drives, a dashboard showing *your* services all green — there's a pride in it that no cloud console reproduces. It's your stack, end to end, and it hums in your home. That feeling, as much as any principle, is what turns a curious beginner into someone who stays.
 
+And all of it rests on something worth saying out loud: open source. Every service above — the hypervisor, the firewall, the proxy, the backups, the pipeline — is free software built by people who simply decided the world should have it. No licenses to negotiate, no sales calls, no one asking for your job title before letting you build. That matters more than it sounds. It means someone with a student budget and a closet can run the same classes of systems as companies with entire departments — networks, monitoring, automation, the works. Nobody gets to tell you it's not for you, that you're not the right kind of person, that you're not capable. The gate is open and unguarded. There is a whole worldwide community of passionate weirdos running entire infrastructures from their homes and sharing everything they learn, and the price of admission is curiosity. I love that about this world. It might be my favorite part.
+
 ## What the consequences taught me
 
 Three patterns keep showing up, and I offer them as observations from one lab, not laws of nature.
