@@ -1,6 +1,6 @@
 # Blog
 
-Hugo blog for [cleeryy.com](https://cleeryy.com) and [blog.cleeryy.com](https://blog.cleeryy.com) with automated Docker deployment.
+Hugo blog for [cleeryy.com](https://cleeryy.com) and [blog.cleeryy.cloud](https://blog.cleeryy.cloud) with automated Docker deployment. Restored from VPS backup (April 2026), theme terminal.
 
 ## Features
 
