@@ -6,54 +6,58 @@ authorTwitter = ""
 cover = ""
 tags = ["homelab", "self-hosting", "essay", "own-your-data"]
 keywords = ["homelab", "home server", "self-hosting", "proxmox", "opnsense"]
-description = "A homelab is infrastructure you own, where consequences teach what manuals can't. From a dead VPS to a two-node Proxmox cluster: what ownership changes, and how to reason about starting."
+description = "A homelab is infrastructure you own, where the consequences reach you. From one dead VPS to a small cluster at home: what ownership changes, and how to think about starting."
 showFullContent = false
 readingTime = true
 hideComments = false
 +++
 
-*Two years of renting servers taught me to be a customer. Owning them taught me how they work. A homelab is the difference — and it is smaller, cheaper, and more instructive than it looks.*
+*For two years I rented servers and learned to be a customer. Then I started owning them, and learned how they work. This is about that difference — and how to get it for roughly the price of a used office PC.*
 
-## The short answer
+## A personal infrastructure with your name on the failures
 
-A homelab is a personal infrastructure run at home: servers, network, storage, and services you operate yourself, outside of production, to learn how real systems behave. The definition matters less than the property that makes it work: you own the computers, so you own the consequences. When something breaks at 2am, there is no support ticket — there is you, documentation, and a lesson you will not forget.
+Ask five homelabbers what a homelab is and you'll get five answers involving racks, LEDs, and strong opinions about filesystems. Here's a simpler one that has held up for me: a homelab is infrastructure you run at home, outside of production, where the consequences of everything reach you personally.
 
-That last point is doing most of the explanatory work in this article, so let's make it precise: renting infrastructure teaches you interfaces, owning it teaches you systems. Everything below is an elaboration of that distinction, grounded in one real setup — mine.
+That last clause is the whole definition. A lab at work has a team, a budget, and a blameless post-mortem culture. A homelab has you, your evenings, and the specific silence of a house where the media server just died during movie night. It is a place to learn systems from the inside — virtualization, networking, storage, security — with real stakes and zero career risk. If that sounds like a strange hobby, it is. It is also, in my experience, the fastest way to actually understand the field I'm studying.
 
-## Renting teaches the interface
+## The line where renting stops teaching
 
-For two years, this blog lived on a rented virtual server running a plain Apache setup. It worked. I paid monthly, never thought about hardware, and learned almost nothing about hosting. When I cancelled that VPS, the blog died with it; all that remained was a backup tarball in my Nextcloud. The resurrection — from that tarball to the git pipeline serving this page — is recounted [here](/posts/welcome-back/).
+This blog used to live on a rented virtual server: plain Apache, monthly bill, no thought about hardware. It worked fine until I cancelled the VPS, at which point the blog simply ceased to exist. What survived was a backup tarball in my Nextcloud — and the resurrection, from that tarball to the pipeline serving this page, is told [here](/posts/welcome-back/).
 
-The episode is instructive beyond anecdote. A VPS draws a hard line at the hypervisor: everything below your virtual machine — hardware, network, storage, failure — is someone else's problem by design. That is the product, and it is a fine product. But learning stops exactly at that line, which is where the interesting failures live: the disk that degrades, the network path that changes, the 3am latency nobody can explain. Renting is the right tool for reach and elasticity. It is a poor tool for understanding, because understanding lives one layer below the contract.
+I'm fond of that story, but the useful part isn't the recovery. It's what the setup never taught me. A VPS draws a hard line at the hypervisor: below your virtual machine — the hardware, the network paths, the disks aging quietly — everything is someone else's problem by design. Good product, honestly. But learning stops exactly at that line, and the interesting failures live below it. Renting teaches you interfaces; the machinery underneath stays abstract forever. You can be a perfectly competent VPS customer for years and never once think about what happens when a drive starts clicking.
 
-## Owning teaches the stack
+Ownership moves the line. When the machine is yours, there is no below-the-contract. There is just the stack, all the way down, and you, meeting it layer by layer.
 
-My current setup, all documented and running as I write this: a two-node Proxmox cluster, an OPNsense firewall segmenting the home network into dedicated VLANs (trusted, production, management, guests, and more), a Caddy reverse proxy as the single front door with automatic TLS certificates, a Proxmox Backup Server with an encrypted offsite copy, and application deployments driven straight from git through Dokploy. Each layer exists to answer one question — where does this run, how does traffic reach it, what happens when it dies — and each answer was earned, not read.
+## What mine is made of (and why each part exists)
 
-Consider the firewall, because it best shows how ownership changes thinking. On a VPS, "firewall" means a cloud console checkbox. At home, with OPNsense holding seven VLANs, a firewall rule is a statement about trust: this network may reach that service, on this port, for this reason — everything else is denied by default. Writing those rules forced me to map, for the first time, what every device in my house actually talks to. No tutorial assigns that homework; consequences do.
+My setup, as documented today: a two-node Proxmox cluster for compute, an OPNsense firewall dividing the home network into dedicated VLANs, a Caddy reverse proxy as the single front door with automatic certificates, a Proxmox Backup Server keeping nightly copies plus an encrypted offsite, and app deployments flowing straight from git. Nothing here was bought to impress; each piece answers one persistent question.
 
-Or backups. My Proxmox hosts back up nightly, and the one fact I am proudest of in this whole lab is dated: a full restore was tested and booted. That single verified restore is worth more than years of scheduled jobs, because it converted a belief ("we have backups") into knowledge ("restores work"). The standing rule here — an untested backup is a rumor, not a backup — was not adopted from a book. It was adopted the day the reasoning clicked: a backup you have never restored is a hypothesis about the future, and hypotheses need testing.
+Proxmox answers *where does this run*. Virtual machines for the heavy and the risky, lightweight containers for the rest, and snapshots — one click capturing a machine's entire state before you touch anything. The first time you destroy something and bring it back in under a minute, caution stops being fear and starts being a habit. That habit, more than any feature, is what virtualization is for at home.
 
-## What consequences teach that manuals don't
+OPNsense answers *who may talk to whom*. With the home network split into VLANs — trusted devices, services, management, guests — every firewall rule is a small statement about trust: this network reaches that service, on this port, for this reason, and the default answer is no. Writing those rules was the first time I ever mapped what everything in my house actually talks to. No course assigned that; the firewall demanded it.
 
-Three lessons keep recurring, each traceable to something concrete above.
+Caddy answers *how the outside reaches in*. One front door, real encryption everywhere, services addressed by name instead of a jungle of ports. It sounds cosmetic until you realize it changed how I think about exposing anything: if a service can't earn its place behind the front door, it probably shouldn't be exposed at all.
 
-First, failure arrives with a return address. Last week my deployment pipeline silently stopped updating a container; the cause was a single orchestration setting — services must stop before replacements start, or the old container keeps holding the port. A cloud customer files a ticket and learns nothing. I found the setting, fixed it, and now understand rollout ordering. The scar is the documentation.
+The backup server answers *what survives*. Nightly copies, an encrypted copy far away — and one dated fact I'm genuinely glad to have: a full restore was tested and booted. That test converted a belief into knowledge. Around here the rule is simple: a backup you've never restored is a rumor, not a backup.
 
-Second, privacy follows competence, not the reverse. People rarely start self-hosting from ideology; they start because a thirty-minute DNS filter makes the whole home network quieter, and suddenly routing your own queries feels normal. Ownership first, opinions later — and the opinions, when they come, are earned rather than performed.
+And the git pipeline answers *how this page reaches you*: source on git, image built and scanned automatically, deployed to my own machines on every push. The blog you're reading is both the subject and the demonstration.
 
-Third, discipline compounds. Snapshots before changes, one front door for all services, monitoring on everything because silent failure is the default state of computers, restores tested on schedule. None of this is homelab folklore; it is production hygiene, learned where mistakes cost an evening instead of a job. As one practitioner [puts it](http://usmanmasoodashraf.com/posts/my-first-homelab-setup/), these labs exist to practice "technologies too risky for production systems." The risk is load-bearing.
+## What the consequences taught me
 
-## How to reason about starting
+Three patterns keep showing up, and I offer them as observations from one lab, not laws of nature.
 
-If the above makes the case, the practical question is where to begin — and here the evidence favors boring answers. The most repeated serious advice for beginners is a refurbished office mini PC: roughly €100–150, 16GB of RAM minimum, enough for a dozen services. Eric Lonsdale's [buy/build/rent comparison](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/) lays out the three paths with unusual honesty, and its conclusion matches the community consensus: RAM runs out first, buy what you need now, expand when you hit a limit.
+First, failures come with a return address. Recently my deployer silently stopped updating a container, and the cause turned out to be one orchestration setting about stopping old containers before starting new ones. Untangling that taught me how rollouts actually sequence — the kind of mechanism I'd previously only nodded along to in talks. When there's no vendor to ticket, confusion has nowhere to go except understanding. Slowly. At 2am, sometimes.
 
-If silence and power bills matter — they will, once the box lives near people — the current efficiency reference is Intel's N100 class: around 6 watts idle at the wall, [measured repeatedly rather than marketed](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not/), working out to roughly €10–25 a year in electricity. Against that, weigh the real budget: not hardware, but evenings.
+Second, privacy arrives as a side effect. I didn't start filtering my home DNS out of principle; I started because pages loaded clean and quiet, and then routing my own queries just felt normal. The opinions came later, and they're sturdier for it. A lot of self-hosting works this way: comfort first, convictions earned.
 
-Three diagnostic questions beat any shopping list. What do you want to understand — virtualization, networking, data durability? Buy the cheapest thing that lets you touch *that*. What breaks if the power goes out — and do you care? That answer sizes your UPS and your ambitions. And what is your restore story for the first thing you will host? If the answer is "I'll figure it out later," start there instead: break something unimportant on purpose in week one, and restore it. Ten minutes means you have a lab; a weekend means you have your first lesson. Either way, you win.
+Third, discipline compounds quietly. Snapshot before changes. One front door. Monitoring on everything, because computers fail silently as a default state. Restores tested on a schedule. None of this is homelab folklore — it's ordinary production hygiene, learned someplace where mistakes cost an evening instead of a job. One practitioner [describes these labs](http://usmanmasoodashraf.com/posts/my-first-homelab-setup/) as rooms for "technologies too risky for production systems." I'd add: the risk is doing most of the teaching.
 
-## Owning the question
+## Starting, without the shopping list
 
-So: a homelab is infrastructure you own, operated where the consequences reach you, for the purpose of understanding systems from the inside. Renting rents you reach; owning teaches you the stack. The distinction sounds philosophical until the first outage makes it concrete — then it becomes the most practical thing you know.
+So how should *you* think about starting? The honest answers in this space are refreshingly boring. The most repeated serious advice is a refurbished office mini PC — around €100–150 with 16GB of RAM — and [the clearest comparison of the three paths](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/) (buy used, buy new, rent) concludes the same way the community does: memory runs out first, buy what you need now, expand when something actually limits you.
 
-This series starts from that premise and stays close to one documented lab: next, installing Proxmox and meeting your hardware properly. Bring a spare evening. Snapshot first.
+If the box will live near people, efficiency matters, and the current reference point is Intel's N100 class: about 6 watts idle at the wall, [measured over and over, not marketed](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not/), on the order of €10–25 a year in electricity. The real budget was never hardware, though. It's evenings — and the willingness to spend a few of them confused.
+
+Two questions beat any equipment list. What do you want to *understand* — virtualization, networks, data durability? Buy the cheapest thing that lets you touch exactly that. And what is your restore story for the first thing you host? If the answer is "later," start there: in week one, break something unimportant on purpose and bring it back. Ten minutes means you have a lab. A weekend means you have your first lesson. Both outcomes are the point.
+
+That's the premise this series runs on: one documented lab, real choices, reasoning you can borrow. Next we install Proxmox and meet the hardware properly. Bring a spare evening — and snapshot first.
