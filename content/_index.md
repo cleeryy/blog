@@ -1,24 +1,19 @@
 +++
-date = '2025-04-08T07:52:59Z' 
+date = '2026-10-19T12:00:00Z'
 draft = false
 title = 'welcome to my digital playground'
-author = "cleeryy" 
+author = "cleeryy"
 framed = true
 +++
 
 ## hey there, fellow internet wanderer
-welcome to my little corner of the web. i'm a computer science student with an unhealthy obsession for breaking things (ethically, of course).
+welcome to my little corner of the web. i'm a computer science student with an unhealthy obsession for breaking things (ethically, of course) — and for self-hosting everything i can.
 
-this site is where i document my technical adventures, share what i'm learning, and occasionally ramble about security topics that keep me up at night.
+this site is where i document my technical adventures: CTF writeups, homelab builds, and the occasional security rabbit hole that kept me up at night.
 
-feel free to look around. if something breaks, it's probably a feature, not a bug.
-
-[learn more about the human behind the keyboard](/about)
+**new here?** start with [how this blog came back from the dead](/posts/welcome-back/), take the [/homelab tour](/homelab), or check [what i run](/uses).
 
 ### what's happening
-
-- just built my own vpn infrastructure (it only took 3 energy drinks and a minor existential crisis)
-- exploring the fascinating world of offensive security
-- preparing for my future career as a professional digital troublemaker (aka pentester/red teamer)
-- balancing studying in toulouse with visiting my girlfriend (who tolerates my technical monologues admirably)
-
+- 🔶 back online with a full gitops pipeline (hugo → github → dokploy)
+- 🖥️ twice-weekly homelab series: from first VM to VLANs, backups and monitoring
+- 🏁 fresh CTF writeups landing in [writeups](/writeups)

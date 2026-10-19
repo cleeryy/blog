@@ -35,3 +35,5 @@ my homelab is where i learn by breaking things (ethically, and with snapshots). 
 ## what i write about
 
 twice a week i publish a homelab article here — starting simple (concepts, first VM) and going deeper (VLANs, firewall rules, gitops, monitoring). each one comes with a hands-on tutorial. browse [/posts](/posts) or follow the RSS feed.
+
+**series kickoff**: [welcome back: the blog rises again, this time with gitops](/posts/welcome-back/) — how this very blog was restored from a VPS backup into the pipeline you're reading it from.
