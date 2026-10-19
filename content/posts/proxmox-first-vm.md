@@ -48,6 +48,14 @@ Second, back it up and restore it somewhere else. Proxmox ships `vzdump` for bac
 
 Third, internalize the sentence that governs everything after: snapshots are not backups. A snapshot lives on the same storage as the machine; it protects against your mistakes, not against dead disks. As the same guide stresses, snapshots cover short-term rollback — host failure or pool loss still requires off-host backups. Tattoo it wherever you keep important sentences. We'll build the real backup story later in this series; for now, knowing the difference puts you ahead of most beginners.
 
+## Earn the automation
+
+Everything above was manual on purpose — and now you've earned the shortcut. [Community Scripts](https://community-scripts.org/) is a community-driven library of over four hundred scripts for Proxmox VE and Incus hosts: one-liners that create ready-to-run LXC containers for hundreds of applications, or tune a fresh install. Today, most of my containers started life as one of these scripts. They are genuinely excellent, especially for beginners.
+
+But order matters, and this is the one piece of sequencing advice I'll insist on: do it by hand first, automate second. If your first container comes from a script, the script owns your understanding — when it breaks, you own a black box. If you've already created a VM manually, configured its storage and network yourself, and restored a backup once, then the same script becomes what it should be: a time-saver executing steps you could do blindfolded, skipping tedium instead of skipping learning.
+
+For the very first install, there is one script I'd run without guilt: [PVE Post Install](https://community-scripts.org/scripts/post-pve-install), which sorts out the repository configuration — disabling the enterprise repos you have no subscription for, correcting sources — the kind of fiddly, error-prone setup that teaches little and breaks much. Run it, read what it changed, and move on to the interesting work. Automation you understand is leverage. Automation you don't is a landlord by another name.
+
 ## What "done" looks like
 
 You're finished with this stage when you can answer three questions with yes. Can you delete your first VM without flinching? Can you rebuild it from memory in ten minutes? And do you know, without checking, where its disk lived and where its backup went? Affirmative on all three means the platform is verified, the vocabulary is yours, and the fear is gone — which was the actual assignment all along.
@@ -64,3 +72,4 @@ Next in the series: containers versus virtual machines — what LXC actually is,
 - Vormox, [Install Windows Server 2025 on Proxmox VE](https://vormox.com/blog/how-to-install-windows-server-2025-on-proxmox-ve-step-by-step-guide-for-beginners) — VirtIO SCSI single, q35/OVMF choices, snapshot-after-drivers practice.
 - Proxmox Server Solutions, [Proxmox VE turns 10](https://www.proxmox.com/en/about/company-details/press-releases/proxmox-ve-turns-10) — company history (2005 Vienna, VE 0.9 in April 2008, KVM+OpenVZ then LXC, AGPL).
 - TopInsight, [Proxmox VE in 2025: the default homelab hypervisor, reviewed honestly](https://topinsight.co/storage-homelab/proxmox-ve-review/) — strengths and honest weaknesses (passthrough, network UI, upgrades, Docker, docs).
+- [Community Scripts](https://community-scripts.org/) — community-driven Proxmox VE/Incus script library (400+ scripts); [PVE Post Install](https://community-scripts.org/scripts/post-pve-install) for repository setup on fresh installs.
