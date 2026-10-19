@@ -20,6 +20,8 @@ Ask five homelabbers what a homelab is and you'll get five answers involving rac
 
 That last clause is the whole definition. A lab at work has a team, a budget, and a blameless post-mortem culture. A homelab has you, your evenings, and the specific silence of a house where the media server just died during movie night. It is a place to learn systems from the inside — virtualization, networking, storage, security — with real stakes and zero career risk. If that sounds like a strange hobby, it is. It is also, in my experience, the fastest way to actually understand the field I'm studying.
 
+A word on what it isn't, because three neighbors cause constant confusion. It isn't a NAS: network storage is one component, not the project. It isn't home automation: smart bulbs are remote controls, not infrastructure you operate. And it isn't a miniature public cloud: nothing here serves strangers for money. A homelab serves one household's curiosity — small audience, full responsibility.
+
 ## The line where renting stops teaching
 
 This blog used to live on a rented virtual server: plain Apache, monthly bill, no thought about hardware. It worked fine until I cancelled the VPS, at which point the blog simply ceased to exist. What survived was a backup tarball in my Nextcloud — and the resurrection, from that tarball to the pipeline serving this page, is told [here](/posts/welcome-back/).
@@ -36,7 +38,7 @@ Proxmox answers *where does this run*. Virtual machines for the heavy and the ri
 
 OPNsense answers *who may talk to whom*. With the home network split into VLANs — trusted devices, services, management, guests — every firewall rule is a small statement about trust: this network reaches that service, on this port, for this reason, and the default answer is no. Writing those rules was the first time I ever mapped what everything in my house actually talks to. No course assigned that; the firewall demanded it.
 
-Caddy answers *how the outside reaches in*. One front door, real encryption everywhere, services addressed by name instead of a jungle of ports. It sounds cosmetic until you realize it changed how I think about exposing anything: if a service can't earn its place behind the front door, it probably shouldn't be exposed at all.
+Caddy answers *how the outside reaches in*. One front door, real encryption everywhere, services addressed by name instead of a jungle of ports. As I write this, sixty-five virtual hosts pass through that single door. It sounds cosmetic until you realize it changed how I think about exposing anything: if a service can't earn its place behind the front door, it probably shouldn't be exposed at all.
 
 Three more services answer questions you don't know you have until something breaks. Technitium, the internal DNS, answers *how anything finds anything*: every container registers its name automatically, so the whole lab talks in names, never in numbers you have to remember. Authentik answers *who may enter*: one identity, one login, guarding the services that matter instead of a dozen scattered passwords. And Warpgate answers *how I get in*: a single SSH doorway with proper authentication, so remote access means one hardened path instead of ports forwarded hopefully. None of these serve a single app. They serve all of them, invisibly, which is exactly why they're critical — you only notice infrastructure like this the day it stops.
 
