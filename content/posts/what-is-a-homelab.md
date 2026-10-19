@@ -38,6 +38,10 @@ OPNsense answers *who may talk to whom*. With the home network split into VLANs 
 
 Caddy answers *how the outside reaches in*. One front door, real encryption everywhere, services addressed by name instead of a jungle of ports. It sounds cosmetic until you realize it changed how I think about exposing anything: if a service can't earn its place behind the front door, it probably shouldn't be exposed at all.
 
+Three more services answer questions you don't know you have until something breaks. Technitium, the internal DNS, answers *how anything finds anything*: every container registers its name automatically, so the whole lab talks in names, never in numbers you have to remember. Authentik answers *who may enter*: one identity, one login, guarding the services that matter instead of a dozen scattered passwords. And Warpgate answers *how I get in*: a single SSH doorway with proper authentication, so remote access means one hardened path instead of ports forwarded hopefully. None of these serve a single app. They serve all of them, invisibly, which is exactly why they're critical — you only notice infrastructure like this the day it stops.
+
+Then there's the part the family actually sees: the files, the photos, the movies. Nextcloud holds the documents, Immich keeps the photo library off someone else's cloud, and a small media stack serves the living room. These are the services that justify everything above to non-technical humans. A firewall rule impresses nobody at dinner; photos that load instantly, from your own server, do.
+
 The backup server answers *what survives*. Nightly copies, an encrypted copy far away — and one dated fact I'm genuinely glad to have: a full restore was tested and booted. That test converted a belief into knowledge. Around here the rule is simple: a backup you've never restored is a rumor, not a backup.
 
 And the git pipeline answers *how this page reaches you*: source on git, image built and scanned automatically, deployed to my own machines on every push. The blog you're reading is both the subject and the demonstration.
