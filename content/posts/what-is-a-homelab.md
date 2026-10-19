@@ -4,68 +4,54 @@ date = "2026-10-19T14:45:00Z"
 author = "cleeryy"
 authorTwitter = ""
 cover = ""
-tags = ["homelab", "beginners", "proxmox", "self-hosting", "guide"]
-keywords = ["homelab", "home server", "proxmox", "self-hosting", "beginner guide", "mini pc", "raspberry pi"]
-description = "a homelab is a personal playground where you learn infrastructure by breaking it safely. here's what it is, what it costs, and the exact setup i'd buy today."
+tags = ["homelab", "beginners", "proxmox", "self-hosting", "essay"]
+keywords = ["homelab", "home server", "proxmox", "self-hosting", "why homelab"]
+description = "two years ago my blog lived on a rented VPS. then i killed the VPS — and discovered the difference between renting computers and owning them. this is that story, and why you should start your own lab."
 showFullContent = false
 readingTime = true
 hideComments = false
 +++
 
-## the one-sentence version
+it was a tuesday night, almost 2am, and i had just locked myself out of my own network.
 
-a homelab is a server (or three) in your home where you learn how real infrastructure works by running it yourself — and breaking it, safely, at 2am, with nobody watching.
+not metaphorically. i had been playing with VLANs on my firewall — one wrong rule, one click too confident — and suddenly my laptop couldn't reach anything, including the firewall itself. the girlfriend asleep in the next room, my phone's flashlight between my teeth, a cable plugged straight into the box to undo what i'd done. twenty minutes of pure, sweaty panic. and when the dashboard came back, i laughed out loud, alone in the dark.
 
-if you've ever thought "i'd love to understand docker/networking/linux properly but i don't want to break anything important" — that's exactly the problem a homelab solves. it's a sandbox with real consequences (your plex goes down, your family complains) but zero career risk.
+that night taught me more about networking than a semester of lectures. and that, right there, is a homelab.
 
-## why bother? four honest reasons
+## renting computers vs owning them
 
-**1. you learn 10x faster by touching things.** reading about VLANs for a week < configuring one wrong once and losing access to your own NAS for an evening. the scar tissue is the lesson. this matches what every homelabber will tell you: the community wisdom on r/homelab boils down to "build it, break it, snapshot first next time".
+for two years, my blog lived on a VPS — a virtual server rented from someone else's datacenter, running a plain apache server. it worked fine. i paid every month, i never thought about the hardware, and i learned almost nothing. when i finally killed that VPS, the blog died with it, and all i had left was a backup tarball gathering dust in my nextcloud. ([here's how the resurrection went](/posts/welcome-back/).)
 
-**2. privacy and independence.** your photos, your DNS queries, your notes — on your disks, under your rules. not because "big tech is evil", but because it's *your* data and depending on nine subscriptions to access your own files is absurd.
+renting taught me how to be a customer. owning taught me how things work.
 
-**3. career fuel.** there's a reason hiring managers light up at "i run a homelab": it proves you can do the whole loop — install, network, secure, monitor, back up, document. one DevOps guide puts it well: homelabs are where you practice "technologies too risky for production systems" ([usmanmasoodashraf.com](http://usmanmasoodashraf.com/posts/my-first-homelab-setup/)).
+a homelab is the opposite of a VPS: a server — or three — sitting in *your* home, running *your* services, breaking in *your* face at 2am. it's the difference between reading about swimming and getting thrown in the pool. the pool is cold, you swallow water, and you learn to swim fast.
 
-**4. it's genuinely fun.** SSHing into your own rack from a train hits different.
+## the night the ads died
 
-## the three paths: buy, build, or rent?
+my first real victory wasn't impressive on paper. i installed an ad blocker — pihole — as my home DNS server, in a docker container, in about thirty minutes. then i opened a news website and the page just... loaded. clean. silent. no popups, no autoplay video screaming about insurance.
 
-the eternal question, well covered by [readthemanual's buy/build/rent guide](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/). here's my honest take on each:
+i called my girlfriend over to show her. she stared at the screen, then at me, and said "cool" in the exact tone of someone tolerating a technical monologue. but i didn't care. every device in the house was suddenly faster, and *i* had done that, with a thirty-minute container on a machine in my closet. that feeling never really leaves you. it just scales up: first it's the ads, then it's your photos leaving google, then it's your entire digital life running on hardware you own.
 
-**buy refurbished (my recommendation for 90% of people).** an ex-corporate mini PC — Lenovo ThinkCentre Tiny, Dell OptiPlex Micro — costs €100-150, sips 10-35W, and runs proxmox with a handful of VMs without breaking a sweat. 16GB RAM minimum, 32GB if you can. RAM is always the first bottleneck, everything else can wait.
+## what it actually costs (less than your streaming subscriptions)
 
-**buy new mini PC.** the intel N100 class is the current sweet spot: ~6-8W idle at the wall, ~20W under load, silent, around €150-200. annualized that's roughly €10-25/year in electricity ([bigiron.cc measurements](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not)). if silence and power bills matter (they will), this is the chip.
+people imagine server racks and four-figure bills. forget that. the homelab community's best-kept open secret is that the ideal starter machine is a refurbished office mini PC — the kind companies throw out by the pallet. a Lenovo Tiny or Dell Micro costs around €100-150, draws less power than a light bulb at idle, and happily runs a dozen services. eric over at readthemanual, who's been doing this for twenty years, gives exactly this advice to every beginner, and [his breakdown of the three paths — buy, build, or rent](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/) is the most honest guide i've found.
 
-**build custom.** only makes sense for storage beasts (many drive bays) or specific needs (GPU passthrough). for a first lab, it's the slowest path to something running. get something working first, build later when you know what you actually need.
+if silence matters to you (it will, once the machine lives near your bedroom), the current darling is intel's N100: roughly 6 watts idle, whisper-quiet, about €150 new. people have measured it six ways to sunday — [it sips power like a raspberry pi and works like a real computer](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not/). my whole starter setup costs less per year in electricity than two months of the streaming services i cancelled to pay for it. the math isn't even close.
 
-**rent a VPS.** great for learning cloud, hosting something public, or as a WireGuard gateway back home. terrible as your *only* lab: no hardware reality (thermals, disks dying, power cuts), monthly bill, and someone else's computer. i started with a VPS for this very blog — and look where that got me (see [welcome-back](/posts/welcome-back/)).
+so no, you don't need a rack. you need a small box, an evening, and permission to break things.
 
-## what i'd buy today (3 budgets)
+## the religion of the snapshot
 
-- **~€0 — the closet lab**: that old laptop in your drawer + proxmox or plain debian + docker. zero cost, real lessons. start here if you're unsure.
-- **~€150 — the sweet spot**: refurbished mini PC, 16GB+ RAM, 512GB SSD + proxmox. runs 15-20 containers or 3-5 VMs: DNS filtering, reverse proxy, monitoring, media, the works.
-- **~€300 — the comfortable lab**: N100 mini PC (silent, efficient) + a raspberry pi 5 for always-on lightweight services (DNS, wireguard endpoint) + a cheap VPS for public stuff.
+here's the thing nobody tells you on day one: the homelab doesn't teach you technology. it teaches you *discipline disguised as technology*.
 
-## your first week: a project ladder
+it starts with snapshots. proxmox — the free virtualization platform nearly everyone starts on — lets you photograph a machine's entire state in one click before you touch anything. the first time you nuke a VM and restore it in forty seconds, something clicks in your brain: fear leaves the room. and without fear, you experiment ten times more. that one habit, snapshot-before-not-after, is worth more than any tutorial.
 
-don't build the dream architecture on day one. do this instead:
+then comes naming. then monitoring, because you discover things die silently all the time and you'd never know. then backups — real ones, restore-tested ones, because one day a disk *will* click its last click and you'll learn the difference between a backup and a rumor. each scar becomes a rule. my containers are named by VLAN and IP so i always know where anything lives. every service sits behind one reverse proxy with real encryption. nothing important runs unmonitored. none of this came from a book. all of it came from tuesday nights.
 
-1. **day 1-2**: install proxmox, spin up one debian VM, break it, restore the snapshot. learn snapshots *before* you need them.
-2. **day 3-4**: deploy pihole or adguard in docker. 30 minutes, your whole network gets better, and you've learned docker + DNS in one shot.
-3. **week 2**: add a reverse proxy (caddy or nginx-proxy-manager) and reach two services by name instead of `http://192.168.x.y:port`.
-4. **week 3**: uptime kuma watching everything. you'll discover how often things silently die.
-5. **week 4**: your first real backup with an actual restore test. (an untested backup is a rumor, not a backup — whole article coming on this.)
+## why i'm writing this twice a week
 
-## my 5 rules (learned the hard way)
+i'm a computer science student in toulouse. i could learn this stuff in class, in theory, on slides. instead i run a two-node proxmox cluster, a firewall with four VLANs, my own git server, and a deployment pipeline that ships this very page from a git push. not because i need to — because every outage at 2am rewires my brain a little, and i want to keep the receipts.
 
-1. **name everything like you'll forget** — my containers are ID=VLAN+IP so i always know where something lives.
-2. **snapshot before, not after** — the 10 seconds that save weekends.
-3. **one front door** — every service behind the same reverse proxy with real TLS. no `:port` jungle.
-4. **if it's not monitored, it's already down** — you just don't know it yet.
-5. **document as you go** — future-you at 2am during an outage will thank present-you.
+so here's the deal with this series: twice a week, one article, each one about something real in my lab. we'll start where i started — one machine, one VM, trembling hands — and walk all the way down: containers, networks, firewalls, backups that actually restore, and the pipeline serving these words. every piece comes with the hands-on part, because reading about swimming, remember?
 
-## what's next in this series
-
-next up: installing proxmox and your first VM, step by step. then LXC vs VM, SSH done right, docker basics — and from there into the deep end: VLANs, OPNsense rules, backups that actually restore, and the gitops pipeline serving you this page.
-
-the lab is waiting. go break something (after the snapshot).
+the pool is cold. the water's fine. snapshot first — and jump in.
