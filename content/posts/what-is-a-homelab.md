@@ -79,3 +79,10 @@ If the box will live near people, efficiency matters, and the current reference 
 Two questions beat any equipment list. What do you want to *understand* — virtualization, networks, data durability? Buy the cheapest thing that lets you touch exactly that. And what is your restore story for the first thing you host? If the answer is "later," start there: in week one, break something unimportant on purpose and bring it back. Ten minutes means you have a lab. A weekend means you have your first lesson. Both outcomes are the point.
 
 That's the premise this series runs on: one documented lab, real choices, reasoning you can borrow. Next we install Proxmox and meet the hardware properly. Bring a spare evening — and snapshot first.
+
+## Sources
+
+- Eric Lonsdale, [Getting Started with a Homelab: Buy, Build or Rent?](https://readthemanual.co.uk/getting-started-homelab-buy-build-rent/) — readthemanual.co.uk (refurbished picks, RAM guidance, the three paths).
+- [The N100/N305 mini-PC class: what fits and what doesn't](https://www.bigiron.cc/guides/the-n100-n305-mini-pc-class-what-fits-and-what-does-not/) — bigiron.cc (idle/load power measurements).
+- Usman Masood Ashraf, [My First Homelab Setup](http://usmanmasoodashraf.com/posts/my-first-homelab-setup/) — DevOps practitioner's take on labs as safe ground for risky tech.
+- [awesome-selfhosted](https://awesome-selfhosted.net/) — community index of self-hostable software.
