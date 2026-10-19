@@ -42,6 +42,14 @@ The backup server answers *what survives*. Nightly copies, an encrypted copy far
 
 And the git pipeline answers *how this page reaches you*: source on git, image built and scanned automatically, deployed to my own machines on every push. The blog you're reading is both the subject and the demonstration.
 
+## Your own stack, end to end
+
+There is a second reason people build labs, and honestly it might be the stronger one: at some point you look at the list of subscriptions draining your account every month — storage here, photos there, notes somewhere else, a VPN on top — and you do the math. One recent survey put the average at $273 a month across a dozen subscriptions, with nearly four in ten subscribers planning to cancel at least one. Even halving those numbers for a European student budget, the shape of the problem is familiar: a dozen small rents on your own digital life, each too cheap to question, adding up to something you absolutely feel.
+
+Self-hosting is what happens when you question them all at once. The idea is disarmingly simple: instead of renting software that runs on someone else's computers, you run free software on yours. Files, photos, passwords, media, notes — the same categories you currently pay for, living on hardware you own, reachable from anywhere through your own front door. The community keeps [a vast public index of such software](https://awesome-selfhosted.net/), thousands of projects deep, and browsing it feels less like shopping and more like discovering the =
+
+[truncated 2085 chars]
+
 ## What the consequences taught me
 
 Three patterns keep showing up, and I offer them as observations from one lab, not laws of nature.
