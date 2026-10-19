@@ -15,7 +15,7 @@ Rules for the writing cron:
 ## Phase 1 — foundations (start here)
 
 - [x] 2026-10-19 `welcome-back` — blog relaunch (written manually)
-- [ ] `what-is-a-homelab` — what a homelab is/ isn't, goals, budget tiers, my rules (everything as code, tested backups)
+- [x] 2026-10-19 `what-is-a-homelab` — what a homelab is/ isn't, goals, budget tiers, my rules (everything as code, tested backups)
 - [ ] `proxmox-first-vm` — installing proxmox VE, first Linux VM, virtio drivers, snapshots before breaking things
 - [ ] `lxc-vs-vm` — containers vs VMs on proxmox, when to use which, my split in practice
 - [ ] `naming-things` — my ID=VLAN+IP convention, tags, why naming is infrastructure
