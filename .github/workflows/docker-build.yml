@@ -48,7 +48,7 @@ jobs:
 
       - name: Scan image with Trivy
         id: trivy_scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         if: success() && steps.build.outcome == 'success'
         with:
           image-ref: ghcr.io/${{ github.repository_owner }}/blog:${{ github.sha }}
@@ -62,7 +62,7 @@ jobs:
           TRIVY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload Trivy scan results to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@v4
         if: always() && steps.trivy_scan.outcome == 'success'
         with:
           sarif_file: 'trivy-results.sarif'
