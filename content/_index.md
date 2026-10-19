@@ -13,7 +13,7 @@ this site is where i document my technical adventures: CTF writeups, homelab bui
 
 **new here?** start with [how this blog came back from the dead](/posts/welcome-back/), take the [/homelab tour](/homelab), or check [what i run](/uses).
 
-> 📡 follow along: everything new lands here twice a week — grab the [RSS feed](/index.xml) and plug it into your reader of choice.
+> 📡 follow along: everything new lands here twice a week — grab the [RSS feed](/feed.xml) and plug it into your reader of choice.
 
 ### what's happening
 - 🔶 back online with a full gitops pipeline (hugo → github → dokploy)
