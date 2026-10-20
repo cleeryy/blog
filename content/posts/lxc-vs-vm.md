@@ -20,6 +20,8 @@ Proxmox VE ships two virtualization technologies side by side — KVM for full v
 
 That is the entire mental model, and everything practical falls out of it. Fast startup, near-zero memory overhead, hundreds of guests per host — all of that is just what "no second kernel" buys you. And every limitation of containers is the same fact viewed from the other side: there is only one kernel in the building, and it belongs to the host.
 
+Containers earned that model over a long apprenticeship. In Proxmox's early years the container side was OpenVZ, a patched kernel doing isolation out-of-tree; when the necessary primitives — namespaces, cgroups — matured in mainline Linux, LXC replaced OpenVZ from Proxmox VE 4.0 onward, [as the project's own history records](https://www.proxmox.com/en/about/company-details/press-releases/proxmox-ve-turns-10). That lineage matters because it explains the design: LXC containers aren't a lightweight VM format, they're fenced-in host processes, and every behavior below follows from which side of that fence you're standing on.
+
 This blog's stated position, from the [homelab overview](/posts/what-is-a-homelab/), is VMs "for the heavy and the risky" and containers "for the rest." What follows is the reasoning that makes that split more than a vibe.
 
 ## What kernel sharing costs you in isolation
