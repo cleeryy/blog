@@ -179,8 +179,8 @@ so clearly *something* is right, but not quite.
 
 at that point i suspected a two‑stage scheme:
 
-- `UpgradeCode_enc = UpgradeCode_plain xor key1`  
-- `Flag_enc = Flag_plain xor key2`  
+- \(\text{UpgradeCode}_{enc} = \text{UpgradeCode}_{plain} \oplus k_1\)  
+- \(\text{Flag}_{enc} = \text{Flag}_{plain} \oplus k_2\)  
 - and maybe `key2` is actually `UpgradeCode_plain` (very ctf‑ish thing to do).
 
 ***

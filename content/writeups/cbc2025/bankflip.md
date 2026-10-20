@@ -175,26 +175,19 @@ total after username and before `&balance`: 11 + 10 = 21 bytes.
 
 so total before `&balance` is:
 
-```text
-9 + len(username) + 21 = 30 + len(username)
-```
+$$9 + \text{len}(\text{username}) + 21 = 30 + \text{len}(\text{username})$$
 
 i want `&` from `&balance` to be at the **start** of some block. block size is 16. so:
 
-```text
-30 + len(username) ≡ 0 (mod 16)
-```
+$$30 + \text{len}(\text{username}) \equiv 0 \pmod{16}$$
 
 solve that:
 
-```text
-30 mod 16 = 14
-i need len(username) ≡ 2 (mod 16)
-```
+$$30 \bmod 16 = 14 \quad \Rightarrow \quad \text{len}(\text{username}) \equiv 2 \pmod{16}$$
 
 smallest nice length is `2`. but the app requires usernames between 10 and 20 chars. so:
 
-- add 16 → 18 works: `2 + 16 = 18`
+- add 16 → 18 works: \(2 + 16 = 18\)
 
 so `len(username) = 18` makes `&balance` start at the beginning of a block.
 
@@ -223,15 +216,11 @@ block3: "3000" + padding...
 
 cbc says:
 
-```text
-P2 = D_k(C2) xor C1
-```
+$$P_2 = D_k(C_2) \oplus C_1$$
 
 so if i want to change some bytes in `P2`, i xor the corresponding bytes in `C1` with:
 
-```text
-delta = original_byte ^ target_byte
-```
+$$\delta = \text{original\_byte} \oplus \text{target\_byte}$$
 
 and yes, that’s exactly the kind of simple operation that my sleep-deprived brain still managed to mess up twice.
 
@@ -268,9 +257,9 @@ now in the raw token:
 - byte 48–63: c2
 - etc.
 
-since `&balance` starts at the beginning of plaintext block2, i need to modify ciphertext block1, which starts at `16 + 16 = 32`.
+since `&balance` starts at the beginning of plaintext block2, i need to modify ciphertext block1, which starts at \(16 + 16 = 32\).
 
-the first char (`&`) is fine, so i start flipping at offset `32 + 1`.
+the first char (`&`) is fine, so i start flipping at offset \(32 + 1 = 33\).
 
 ***
 
