@@ -171,7 +171,7 @@ count fixed parts:
 timestamp is 10 digits for a while. balance is under 4 digits initially.
 
 total before username: 9 bytes.  
-total after username and before `&balance`: 11 + 10 = 21 bytes.
+total after username and before `&balance`: \(11 + 10 = 21\) bytes.
 
 so total before `&balance` is:
 
