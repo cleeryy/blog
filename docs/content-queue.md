@@ -17,7 +17,7 @@ Rules for the writing cron:
 - [x] 2026-10-19 `welcome-back` — blog relaunch (written manually)
 - [x] 2026-10-19 `what-is-a-homelab` — what a homelab is/ isn't, goals, budget tiers, my rules (everything as code, tested backups)
 - [x] 2026-10-19 `proxmox-first-vm` — installing proxmox VE, first Linux VM, virtio drivers, snapshots before breaking things
-- [ ] `lxc-vs-vm` — containers vs VMs on proxmox, when to use which, my split in practice
+- [x] 2026-10-20 `lxc-vs-vm` — containers vs VMs on proxmox, when to use which, my split in practice
 - [ ] `naming-things` — my ID=VLAN+IP convention, tags, why naming is infrastructure
 - [ ] `ssh-done-right` — keys only, ed25519, ssh config aliases, BatchMode for scripts
 - [ ] `docker-in-10-minutes` — images vs containers, volumes, compose basics, first self-hosted app
