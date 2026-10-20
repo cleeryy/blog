@@ -21,7 +21,20 @@ enableEmoji = true
 [markup.highlight]
   noClasses = false
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [["\\[", "\\]"], ["$$", "$$"]]
+          inline = [["\\(", "\\)"]]
+
 [params]
+  # KaTeX global (math.html chargé via extended_head quand math=true).
+  # Pas de `$...$` inline : les writeups CTF sont pleins de `$` shell.
+  math = true
+
   # dir name of your main content (default is `content/posts`).
   # the list of set content will show up on your index page (baseurl).
   contentTypeName = "posts"

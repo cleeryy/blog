@@ -5,9 +5,11 @@ draft = false
 tags = ["reverse", "crypto", "aes", "htb"]  
 categories = ["writeups"]  
 ctf = "hackthebox"  
-points = 0  
-solves = 0  
-+++  
+points = 0
+solves = 0
+[params]
+  math = true
++++
 
 ## tl;dr  
 
