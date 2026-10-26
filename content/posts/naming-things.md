@@ -1,6 +1,6 @@
 +++
 title = "read the ID, know the address. naming as infrastructure."
-date = "2026-10-23T08:00:00Z"
+date = "2026-10-23T06:03:00Z"
 author = "cleeryy"
 authorTwitter = ""
 cover = ""
