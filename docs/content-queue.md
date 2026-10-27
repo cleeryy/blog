@@ -19,7 +19,7 @@ Rules for the writing cron:
 - [x] 2026-10-19 `proxmox-first-vm` — installing proxmox VE, first Linux VM, virtio drivers, snapshots before breaking things
 - [x] 2026-10-20 `lxc-vs-vm` — containers vs VMs on proxmox, when to use which, my split in practice
 - [x] 2026-10-23 `naming-things` — my ID=VLAN+IP convention, tags, why naming is infrastructure
-- [ ] `ssh-done-right` — keys only, ed25519, ssh config aliases, BatchMode for scripts
+- [x] 2026-10-27 `ssh-done-right` — keys only, ed25519, ssh config aliases, BatchMode for scripts
 - [ ] `docker-in-10-minutes` — images vs containers, volumes, compose basics, first self-hosted app
 - [ ] `reverse-proxy-explained` — why one front door: SNI routing, TLS termination, caddy vs nginx-proxy-manager vs traefik
 
