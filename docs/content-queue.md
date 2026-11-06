@@ -25,7 +25,7 @@ Rules for the writing cron:
 
 ## Phase 2 — network & OPNsense
 
-- [ ] `vlans-at-home` — what VLANs solve, trunk vs access ports, my 4-VLAN layout (trusted/prod/mgmt/guest)
+- [x] 2026-11-06 `vlans-at-home` — what VLANs solve, trunk vs access ports, my 4-VLAN layout (trusted/prod/mgmt/guest)
 - [ ] `opnsense-first-rules` — default deny mindset, LAN out, guest isolation, reading the firewall log
 - [ ] `dns-at-home` — technitium vs pihole vs unbound, local zones, why DNS is the real front door
 - [ ] `dhcp-done-clean` — static leases for infra, dynamic pools for clients, documenting every address
