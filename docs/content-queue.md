@@ -31,7 +31,7 @@ Rules for the writing cron:
 - [x] 2026-11-17 `dhcp-done-clean` — static leases for infra, dynamic pools for clients, documenting every address
 - [x] 2026-11-23 `wireguard-remote-access` — road-warrior VPN into the lab, one peer at a time, kill-switch thinking
 - [x] 2026-11-24 `reverse-proxy-caddy` — caddyfile anatomy, wildcard certs via DNS challenge, validate+reload ritual
-- [ ] `cloudflare-tunnels-vs-open-ports` — exposing services: port-forward, tunnel, or VPN-only? threat model each
+- [x] 2026-11-27 `cloudflare-tunnels-vs-open-ports` — exposing services: port-forward, tunnel, or VPN-only? threat model each
 - [ ] `observing-traffic` — ntopng/ntop basics, what normal looks like so anomalies stand out
 
 ## Phase 3 — data & backups
